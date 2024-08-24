@@ -66,14 +66,14 @@ processtree = function(t){
   for (f in curfiles){
     station=substr(f,4,5)
     curdf=read.csv(sprintf("./Microclimate_data_raw/%s",f),header=TRUE)
-    for(c in appcol){
-      curcols=colnames(curdf)[str_detect(colnames(curdf),c)]
-      if(length(curcols)<2){
-        next
-      }
-      curdf=unite(curdf, new, curcols, sep = "", remove = FALSE ,na.rm=TRUE)
-      colnames(curdf)=replace(colnames(curdf),colnames(curdf)=="new",c)
-    }
+    # for(c in appcol){
+    #   curcols=colnames(curdf)[str_detect(colnames(curdf),c)]
+    #   if(length(curcols)<2){
+    #     next
+    #   }
+    #   curdf=unite(curdf, new, curcols, sep = "", remove = FALSE ,na.rm=TRUE)
+    #   colnames(curdf)=replace(colnames(curdf),colnames(curdf)=="new",c)
+    # }
     curdf=select(curdf,ends_with(appcol))
     curdf$Station=try(rep(station,length(curdf[,1])))
     curdf$Tree=try(rep(t,length(curdf[,1])))
