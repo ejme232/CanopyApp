@@ -93,8 +93,8 @@ addhobo = function(d,station){
   
   for(r in 1:nrow(d)){
     currow=d[r,]
-    if(as.character(currow$Timestamp[1]) %in% fulldata['Timestamp']){
-        fulldata[which(fulldata$Timestamp==currow$Timestamp[1]),'Air.TempC'] = as.numeric(currow$`Air TempC`[1])
+    if(as.character(currow$Timestamp[1]) %in% fulldata$Timestamp){
+        fulldata[which(fulldata$Timestamp==currow$Timestamp[1]),'Air.TempC'] = as.numeric(currow$`Air.TempC`[1])
       } else {
         fulldata = add_row(fulldata, Timestamp=currow[1,1], Air.TempC=as.numeric(currow[1,2]))
       }

@@ -124,6 +124,15 @@ for(i in HOBO.vec){
   curhobo[,1]=strftime(curhobo[,1])
   curhobo=curhobo[curhobo$Timestamp>Last.import,]
   addhobo(curhobo,i)
+  
+  hobo.import.log <- hobo.import.log %>%
+    mutate(Last.import = case_when(
+      HOBO.ID == i ~ max(curhobo$Timestamp, na.rm = T),
+      HOBO.ID != i ~ as.character(Last.import)))
+  
+  write_csv(hobo.import.log, file.path("Microclimate_data_supporting",
+                                  "hobo_import_log.csv"))
+  
   print(str_c("Done with ",i))
 }
 
